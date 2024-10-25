@@ -13,22 +13,23 @@ void solve() {
   int n, p, q;
   cin >> n >> p >> q;
   vector<int> a_i(n + 9, 0);
-  vector<int> a_i_diff(n + 9, 0);
+  vector<int> a_i_q(n + 9, 0);
+  vector<int> a_i_next(n + 9, 0);
   vector<int> a_i_sum(n + 9, 0);
   for (int i = 1; i <= n; i++) {
     cin >> a_i[i];
   }
-  for (int i = 1; i <= n; i++) {
-    a_i_diff[i] = a_i[i] - a_i[i - 1];
-  }
   while (p--) {
     int l_1, r_1, x;
     cin >> l_1 >> r_1 >> x;
-    a_i_diff[l_1] += x;
-    a_i_diff[r_1 + 1] -= x;
+    a_i_q[l_1] += x;
+    a_i_q[r_1 + 1] -= x;
   }
   for (int i = 1; i <= n; i++) {
-    a_i[i] = a_i[i - 1] + a_i_diff[i];
+    a_i_next[i] = a_i_next[i - 1] + a_i_q[i];
+  }
+  for (int i = 1; i <= n; i++) {
+    a_i[i] += a_i_next[i];
   }
   for (int i = 1; i <= n; i++) {
     a_i_sum[i] = a_i_sum[i - 1] + a_i[i];
