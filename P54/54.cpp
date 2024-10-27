@@ -9,19 +9,29 @@
 #define endl '\n'
 #define int long long
 using namespace std;
+const int N = 2e5 + 10;
+
+class Book {
+ public:
+  int a, b, c;
+  bool operator<(const Book &u) const {
+    if (a == u.a && b == u.b) return c < u.c;
+    if (a == u.a) return b < u.b;
+    return a < u.a;
+  }
+} p[N];
 
 void solve() {
   int n;
   cin >> n;
-  vector<int> a;
   for (int i = 1; i <= n; i++) {
-    int x;
-    cin >> x;
-    a.push_back(x);
+    cin >> p[i].a >> p[i].b >> p[i].c;
   }
-  sort(a.begin(), a.end());
-  a.erase(unique(a.begin(), a.end()), a.end());
-  for (auto& i : a) cout << i << " ";
+  sort(p + 1, p + 1 + n);
+  reverse(p + 1, p + 1 + n);
+  for (int i = 1; i <= n; i++) {
+    cout << p[i].a << " " << p[i].b << " " << p[i].c << endl;
+  }
 }
 
 signed main() {
