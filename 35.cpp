@@ -32,7 +32,8 @@ void solve() {
     //变化:
     int mx = 0, fix = 0;
     for (int i = 1; i <= n; i++) {
-      mx = max(0ll, mx + (a[i] ? -1 : 1)w[i]);  //子段最值
+      mx = max(0ll,
+               mx + (type_animal[i] ? -1 : 1) * weight_animal[i]);  //子段最值
       fix = max(fix, mx);  //全局最值(根据子段最值求出全局最值)
     }
     cout << ess + fix << endl;
