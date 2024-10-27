@@ -27,7 +27,7 @@ void solve() {
           i = k + 1;
         }
       }
-      l_max = max(l_max, j - i + 1);
+      l_max = max(l_max, j - i + 1ll);
     }
     cout << l_max + 1 << endl;
   }
