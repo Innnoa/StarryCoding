@@ -25,13 +25,15 @@ void solve() {
       cin >> weight_animal[i];
     }
     int ess = 0;
+    //不变:
     for (int i = 1; i <= n; i++) {
-      ess += type_animal[i] * weight_animal[i];
+      ess += type_animal[i] * weight_animal[i];  //鸭鸭最初的重量
     }
+    //变化:
     int mx = 0, fix = 0;
     for (int i = 1; i <= n; i++) {
-      mx = max(0ll, mx + (a[i] ? -1 : 1)w[i]);
-      fix = max(fix, mx);
+      mx = max(0ll, mx + (a[i] ? -1 : 1)w[i]);  //子段最值
+      fix = max(fix, mx);  //全局最值(根据子段最值求出全局最值)
     }
     cout << ess + fix << endl;
   }
