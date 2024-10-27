@@ -22,10 +22,11 @@ void solve() {
     cin >> x;
     int l = 0, r = n;
     while (l + 1 != r) {
-      if (x > a[((l + r) >> 1)]) {
-        l = ((l + r) >> 1);
+      int mid = ((l + r) >> 1);
+      if (x > a[mid]) {
+        l = mid;
       } else {
-        r = ((l + r) >> 1);
+        r = mid;
       }
     }
     if (a[r] == x)
