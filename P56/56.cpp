@@ -9,19 +9,20 @@
 #define endl '\n'
 #define int long long
 using namespace std;
-
+const int N = 2e5 + 10;
+int c[N];
 void solve() {
   int n;
   cin >> n;
-  vector<int> a;
   for (int i = 1; i <= n; i++) {
-    int a_i;
-    cin >> a_i;
-    a.push_back(a_i);
+    int x;
+    cin >> x;
+    c[x]++;
   }
-  sort(a.begin(), a.end());
-  for (auto &i : a) {
-    cout << i << " ";
+  for (int i = 0; i < 2e5; i++) {
+    for (int j = 0; j < c[i]; j++) {
+      cout << i << " ";
+    }
   }
 }
 
