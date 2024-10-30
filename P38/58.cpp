@@ -10,8 +10,12 @@
 #define int long long
 using namespace std;
 
+struct cmp {
+  bool operator()(const int &u, const int &v) const { return u < v; }
+};
+
 void solve() {
-  priority_queue<int> pq;
+  priority_queue<int, vector<int>, cmp> pq;
   int q;
   cin >> q;
   int weight = 0;
