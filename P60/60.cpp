@@ -12,24 +12,19 @@ using namespace std;
 const int N = 2e5 + 10;
 int a[N];
 int res[N];
+stack<int> good;
 void solve() {
-  a[0] = 1e9 + 1;
   int n;
   cin >> n;
+  good.push(1e9 + 1);
   for (int i = 1; i <= n; i++) {
     cin >> a[i];
-    if (a[i] < a[i - 1] && res[i - 1] == -1) {
+    while (!good.empty() && good.top() >= a[i]) good.pop();
+    if (good.empty()) {
       res[i] = -1;
-    }
-    for (int j = i - 1; j >= 0; j--) {
-      if (a[j] < a[i]) {
-        res[i] = a[j];
-        j = -1;
-      }
-    }
-    if (!res[i]) {
-      res[i] = -1;
-    }
+    } else
+      res[i] = good.top();
+    good.push(a[i]);
   }
   for (int i = 1; i <= n; i++) {
     cout << res[i] << " ";
