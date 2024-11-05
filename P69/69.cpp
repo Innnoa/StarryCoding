@@ -18,7 +18,7 @@ struct Edge {  //自定义类型edge用于存储节点的指向节点和路径�
 bitset<N> vis;  // vis做标记
 int d[N];       // d数组存储最短路径
 vector<Edge> node[N];  //生成edge类型数组,用于存储节点的入,出,价值,有点像桶
-void dijstra(int x) {
+void dijkstra(int x) {
   memset(d, 0x3f,
          sizeof(int) * (n + 1));  //设d数组初值为0x3f,使其在下文的比较中覆盖
   d[x] = 0;                       //最初节点的价值为0
@@ -41,7 +41,7 @@ void solve() {
     cin >> u >> v >> w;
     node[u].push_back({v, w});
   }
-  dijstra(1);
+  dijkstra(1);
   if (d[n] >= 0x3f3f3f3f3f3f) {
     cout << "-1";
   } else

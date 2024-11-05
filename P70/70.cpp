@@ -14,22 +14,30 @@ const int N = 2e5 + 9;
 int n, m;
 struct Edge {  //自定义类型edge用于存储节点的指向节点和路径价值
   int out, value;
+  bool operator<(const Edge& v) const {  //自定义运算符
+    return value == v.value ? out < v.out : value > v.value;
+  }
 };
 bitset<N> vis;  // vis做标记
 int d[N];       // d数组存储最短路径
 vector<Edge> node[N];  //生成edge类型数组,用于存储节点的入,出,价值,有点像桶
-void dijstra(int x) {
+void dijkstra(int x) {
   memset(d, 0x3f,
          sizeof(int) * (n + 1));  //设d数组初值为0x3f,使其在下文的比较中覆盖
   d[x] = 0;                       //最初节点的价值为0
-  for (int i = 1; i <= n; i++) {  //对所有节点遍历
-    int u = 1;
-    for (int j = 1; j <= n; j++) {  //寻找最小点
-      if (vis[u] || (!vis[j] && d[j] < d[u])) u = j;
-    }
-    vis[u] = true;                  //标记为true
-    for (auto& [v, w] : node[u]) {  //在最小点中找各路径,并计算各路径的价值
-      if (!vis[v] && d[v] > d[u] + w) d[v] = d[u] + w;
+  priority_queue<Edge> pq;  //用快速队列(堆)来存储,自带维护,小顶堆
+  pq.push({x, d[x]});       //先把x存入
+  while (
+      pq.size()) {  //其实都是一个东西,只是因为小顶堆自带维护功能,代替其挨个找最小
+    int a = pq.top().out;
+    pq.pop();
+    if (vis[a]) continue;
+    vis[a] = true;
+    for (auto& [y, w] : node[a]) {
+      if (!vis[y] && d[y] > d[a] + w) {  //判断
+        d[y] = d[a] + w;
+        pq.push({y, d[y]});  //压入
+      }
     }
   }
 }
@@ -41,7 +49,7 @@ void solve() {
     cin >> u >> v >> w;
     node[u].push_back({v, w});
   }
-  dijstra(1);
+  dijkstra(1);
   if (d[n] >= 0x3f3f3f3f3f3f) {
     cout << "-1";
   } else
