@@ -25,7 +25,7 @@ void dijkstra(int x) {
   memset(d, 0x3f,
          sizeof(int) * (n + 1));  //设d数组初值为0x3f,使其在下文的比较中覆盖
   d[x] = 0;                       //最初节点的价值为0
-  priority_queue<Edge> pq;  //用快速队列(堆)来存储,自带维护,小顶堆
+  priority_queue<Edge> pq;  //用优先队列(堆)来存储,自带维护,小顶堆
   pq.push({x, d[x]});       //先把x存入
   while (
       pq.size()) {  //其实都是一个东西,只是因为小顶堆自带维护功能,代替其挨个找最小
