@@ -9,11 +9,18 @@
 #define endl '\n'
 #define int long long
 using namespace std;
-
-void solve() {}
+int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }
+int lcm(int a, int b) { return a * (b / gcd(a, b)); }
+void solve() {
+  int a, b;
+  cin >> a >> b;
+  cout << gcd(a, b) << " " << lcm(a, b) << endl;
+}
 
 signed main() {
   ios::sync_with_stdio(false), cin.tie(nullptr), cout.tie(nullptr);
-  solve();
+  int _;
+  cin >> _;
+  while (_--) solve();
   return 0;
 }
