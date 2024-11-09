@@ -15,11 +15,11 @@ void solve() {
   cin >> n;
   vector<int> res;
   for (int i = 2; i <= n / i; i++) {
-    if (n % i) {
+    if (n % i) {  //找到可以整除的
       continue;
     }
     res.push_back(i);
-    while (n % i == 0) {
+    while (n % i == 0) {  //这里什么意思,除干净
       n /= i;
     }
   }
