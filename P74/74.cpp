@@ -11,20 +11,19 @@
 using namespace std;
 int T, M;
 int t[105], v[105];
-int dp[2][1009];
+int dp[1009];
 void solve() {
-  for (int i = 0; i <= T; i++) dp[0][i] = 0;
+  for (int i = 0; i <= T; i++) dp[i] = 0;
   for (int i = 1; i <= M; i++) cin >> t[i] >> v[i];
   for (int i = 1; i <= M; i++) {
-    int y = i & 1;
-    for (int j = 1; j <= T; j++) {
+    for (int j = T; j >= 1; j--) {
       if (j >= t[i])
-        dp[y][j] = max(dp[y ^ 1][j], dp[y ^ 1][j - t[i]] + v[i]);
+        dp[j] = max(dp[j], dp[j - t[i]] + v[i]);
       else
-        dp[y][j] = dp[y ^ 1][j];
+        dp[j] = dp[j];
     }
   }
-  cout << dp[M & 1][T] << endl;
+  cout << dp[T] << endl;
 }
 
 signed main() {
