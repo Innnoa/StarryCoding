@@ -16,7 +16,7 @@ void solve() {
   for (int i = 0; i <= T; i++) dp[i] = 0;
   for (int i = 1; i <= M; i++) cin >> t[i] >> v[i];
   for (int i = 1; i <= M; i++) {
-    for (int j = T; j >= 1; j--) {
+    for (int j = T; j >= 0; j--) {
       if (j >= t[i])
         dp[j] = max(dp[j], dp[j - t[i]] + v[i]);
       else
